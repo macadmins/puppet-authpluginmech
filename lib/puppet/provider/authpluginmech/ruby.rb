@@ -4,6 +4,11 @@ require 'tempfile'
 Puppet::Type.type(:authpluginmech).provide(:ruby) do
 
     commands :security => '/usr/bin/security'
+    def pre_run_check
+        if(!File.exist?('/private/var/db/auth.db  '))
+            raise Puppet::Error, "/private/var/db/auth.db is missing"
+          end
+      end
 
     def get_auth_plist
         begin
