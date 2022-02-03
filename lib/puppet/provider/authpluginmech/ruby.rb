@@ -7,7 +7,7 @@ Puppet::Type.type(:authpluginmech).provide(:ruby) do
 
     def get_auth_plist
         begin
-            output = security(['authorizationdb', 'read', 'system.login.console'])
+            output = security(['-q', 'authorizationdb', 'read', 'system.login.console'])
         rescue Puppet::ExecutionFailure => e
             Puppet.debug "#get_auth_plist had an error -> #{e.inspect}"
             return {}
