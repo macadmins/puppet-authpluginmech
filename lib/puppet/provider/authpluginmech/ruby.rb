@@ -12,7 +12,10 @@ Puppet::Type.type(:authpluginmech).provide(:ruby) do
             Puppet.debug "#get_auth_plist had an error -> #{e.inspect}"
             return {}
         end
-        return Puppet::Util::Plist.parse_plist(output)
+        
+        plist = Puppet::Util::Plist.parse_plist(output)
+        Puppet.debug("Parsed plist: #{plist.inspect}")
+        return plist
     end
 
     def write_db(plist)
@@ -25,6 +28,7 @@ Puppet::Type.type(:authpluginmech).provide(:ruby) do
     end
 
     def in_plist(plist)
+        Puppet.debug("in_plist called with: #{plist.inspect}")
         if plist['mechanisms'].nil?
             Puppet.debug "#in_plist mechanisms is nil"
             return false
