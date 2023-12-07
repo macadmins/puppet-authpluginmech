@@ -25,6 +25,11 @@ Puppet::Type.type(:authpluginmech).provide(:ruby) do
     end
 
     def in_plist(plist)
+        if plist['mechanisms'].nil?
+            Puppet.debug "#in_plist mechanisms is nil"
+            return false
+        end
+        
         if plist['mechanisms'].include? resource[:entry]
             Puppet.debug "#in_plist returning true"
             return true
