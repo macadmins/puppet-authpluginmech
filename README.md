@@ -18,3 +18,7 @@ authpluginmech { 'My Awesome mech:
     insert_after => 'MCXMechanism:login'
 }
 ```
+
+## macOS Version Compatibility
+
+Tested and compatible with macOS 26 (Tahoe).
